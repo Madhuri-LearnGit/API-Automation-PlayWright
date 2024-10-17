@@ -32,3 +32,21 @@ test('GET /products/1', async ({ request }) => {
     // Console the response body
     console.log(body); 
   });
+
+  //Testing for PUT API
+test('PUT', async ({ request }) => {
+  const response = await request.put('https://reqres.in/api/users/2', {
+    data: {  
+      "name": "Jill ",  
+      "job": "Software Engineer"  
+    }   , 
+  });
+  const body = await response.json();
+
+  //check response status is passed
+  expect(response.ok()).toBeTruthy(); 
+  // Check HTTP status code
+  expect(response.status()).toBe(200); 
+  // Console the response body
+  console.log(body); 
+});
