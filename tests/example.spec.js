@@ -19,8 +19,8 @@ test('get started link', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
 });
 
-//GET API testing
-test('GET /products/1', async({ page }) => {
+//Testing GET API
+test('GET /products/1', async ({ request }) => {
   const response = await request.get('https://fakestoreapi.com/products/1');
   const body = await response.json();
 
@@ -29,5 +29,41 @@ test('GET /products/1', async({ page }) => {
   // Check HTTP status code
   expect(response.status()).toBe(200); 
   // Console the response body
-  console.log(body);
+  console.log(body); 
+});
+
+//Testing for POST API
+test('POST', async ({ request }) => {
+  const response = await request.post('https://reqres.in/api/users', {
+    data:  {  
+      "name": "James",  
+      "job": "leader"  
+    } , 
+  });
+  const body = await response.json();
+
+  //check response status is passed
+  expect(response.ok()).toBeTruthy(); 
+  // Check HTTP status code
+  expect(response.status()).toBe(201); 
+  // Console the response body
+  console.log(body); 
+});
+
+//Testing for PUT API
+test('PUT', async ({ request }) => {
+  const response = await request.put('https://reqres.in/api/users/2', {
+    data: {  
+      "name": "Jill ",  
+      "job": "Software Engineer"  
+    }   , 
+  });
+  const body = await response.json();
+
+  //check response status is passed
+  expect(response.ok()).toBeTruthy(); 
+  // Check HTTP status code
+  expect(response.status()).toBe(200); 
+  // Console the response body
+  console.log(body); 
 });
